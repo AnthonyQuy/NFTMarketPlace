@@ -7,7 +7,7 @@ import Market from "../../NFT/artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import axios from "axios";
 
 const IndexPage = () => {
-  const [nfts, setNfts] = useState<any>([]);
+  const [nfts, setNfts] = useState([] as ListingNFT[]);
   const [loading, setLoading] = useState("not-loaded");
 
   async function loadNFs() {
@@ -19,10 +19,10 @@ const IndexPage = () => {
       provider
     );
 
-    const data = await marketContract.fetchMarketItems();
+    const data: MarketContractItem[] = await marketContract.fetchMarketItems();
 
-    const items = await Promise.all(
-      data.map(async (item: MarketItem) => {
+    const items: ListingNFT[] = await Promise.all(
+      data.map(async (item) => {
         const tokenUri = await tokenContract.tokenURI(item.tokenId);
         const meta = await axios.get(tokenUri);
 
