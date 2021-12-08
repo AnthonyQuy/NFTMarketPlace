@@ -4,8 +4,7 @@
   "scripts": {
     "dev": "next ./FE",
     "build": "next build ./FE",
-    "start": "next start ./FE",
-    "type-check": "tsc"
+    "start": "next start ./FE"
   },
   "dependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",

@@ -42,3 +42,4 @@ cache
 artifacts
 
 .secretAcc1
+output.json
