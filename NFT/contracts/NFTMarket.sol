@@ -57,14 +57,14 @@ contract NFTMarket is ReentrancyGuard {
         );
 
         _itemIds.increment();
-        uint256 itemId = _itemIds.current();
+        uint256 newItemId = _itemIds.current();
 
-        marketItemMap[itemId] = MarketItem(
-            itemId,
+        marketItemMap[newItemId] = MarketItem(
+            newItemId,
             nftContractAddress,
             tokenId,
             payable(msg.sender),
-            payable(address(0)),
+            payable(msg.sender),
             price,
             false
         );
@@ -76,7 +76,7 @@ contract NFTMarket is ReentrancyGuard {
         );
 
         emit MarketItemCreated(
-            itemId,
+            newItemId,
             nftContractAddress,
             tokenId,
             msg.sender,
@@ -84,6 +84,14 @@ contract NFTMarket is ReentrancyGuard {
             price,
             false
         );
+    }
+
+    function getMarketItem(uint256 marketItemId)
+        public
+        view
+        returns (MarketItem memory)
+    {
+        return marketItemMap[marketItemId];
     }
 
     function saleItem(address nftContract, uint256 itemId)
@@ -125,14 +133,14 @@ contract NFTMarket is ReentrancyGuard {
         uint256 myItemCount = 0;
         uint256 currentIndex = 0;
 
-        for (uint256 i = 0; i < totalItemCount; i++) {
+        for (uint256 i = 1; i <= totalItemCount; i++) {
             if (marketItemMap[i].owner == msg.sender) {
                 myItemCount++;
             }
         }
 
         MarketItem[] memory items = new MarketItem[](myItemCount);
-        for (uint256 i = 0; i < totalItemCount; i++) {
+        for (uint256 i = 1; i <= totalItemCount; i++) {
             if (marketItemMap[i].owner == msg.sender) {
                 items[currentIndex] = marketItemMap[i];
                 currentIndex++;
