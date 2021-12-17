@@ -12,18 +12,21 @@ const IndexPage = () => {
 
   async function loadNFs() {
     const provider = new ethers.providers.JsonRpcProvider();
-    const tokenContract = new ethers.Contract(nftAddress, NFT.abi, provider);
+    const nftContract = new ethers.Contract(nftAddress, NFT.abi, provider);
     const marketContract = new ethers.Contract(
       nftMarketAddress,
       Market.abi,
       provider
     );
 
-    const data: MarketContractItem[] = await marketContract.fetchMarketItems();
+    const data = await marketContract.fetchMarketItems();
+    // const data = trx.wait();
+
+    console.log("fetchMarketItems", data);
 
     const items: ListingNFT[] = await Promise.all(
-      data.map(async (item) => {
-        const tokenUri = await tokenContract.tokenURI(item.tokenId);
+      data.map(async (item: any) => {
+        const tokenUri = await nftContract.tokenURI(item.tokenId);
         const meta = await axios.get(tokenUri);
 
         let price = ethers.utils.formatUnits(item.price.toString(), "ether");
@@ -50,6 +53,7 @@ const IndexPage = () => {
   if (loading === "loaded" && !nfts.length) {
     return <h1 className="px-20 py-19 text-3xl">Market is empty </h1>;
   }
+
   return (
     <div className="flex justify-center">
       <div className="px-4" style={{ maxWidth: "1600px" }}>
