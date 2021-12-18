@@ -29,6 +29,9 @@ const Layout = ({ children, title = "This is the default title" }: Props) => (
           <Link href="/sell-nft">
             <a className="mr-6 text-blue-500">Sell NFT</a>
           </Link>
+          <Link href="/my-nft">
+            <a className="mr-6 text-blue-500">My NFT</a>
+          </Link>
           <Link href="/create-nft">
             <a className="mr-6 text-blue-500">Create NFT</a>
           </Link>

@@ -10,8 +10,16 @@ const ItemList = ({ nfts, action }: Props) => (
     <div className="px-4" style={{ maxWidth: "1600px" }}>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
         {nfts.map((nft, i) => (
-          <div key={i} className="border shadow rounded-xl overflow-hidden bg-gray-50">
-            <img src={nft.image} alt={nft.name} />
+          <div
+            key={i}
+            className="border shadow rounded-xl overflow-hidden bg-gray-50"
+          >
+            <img
+              style={{ height: "250px", width: "100%" }}
+              className="object-center"
+              src={nft.image}
+              alt={nft.name}
+            />
             <p
               style={{ height: "64px" }}
               className="text-2xl font-semibold p-2"
