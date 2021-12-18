@@ -21,7 +21,7 @@ type MarketContractItem = {
   sold: boolean;
 };
 
-type ListingNFT = {
+type ListingItem = {
   price: string;
   tokenId: number;
   seller: string;

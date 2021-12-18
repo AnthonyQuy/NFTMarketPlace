@@ -1,7 +1,5 @@
 import CreateToken from "../components/CreateToken";
 import LoadToken from "../components/LoadToken";
-import CreateMarketItem from "../components/CreateMarketItem";
-import LoadMarketItem from "../components/LoadMarketItem";
 
 const CreateNFT = () => {
   return (
@@ -9,8 +7,6 @@ const CreateNFT = () => {
       <div className="w-1/2 flex flex-col p-5 rounded mt-5">
         <CreateToken />
         <LoadToken />
-        <CreateMarketItem />
-        <LoadMarketItem />
       </div>
     </div>
   );

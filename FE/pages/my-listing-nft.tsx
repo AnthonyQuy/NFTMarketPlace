@@ -4,14 +4,14 @@ import { getMarketContract } from "../utils/getMarketContract";
 import ItemList from "../components/MarketItemList";
 import { marketContractItemToListingItem } from "../utils/marketContractItemToListingItem";
 
-const IndexPage = () => {
+const MyListingNFT = () => {
   const [nfts, setNfts] = useState([] as ListingItem[]);
   const [loading, setLoading] = useState("not-loaded");
 
   async function loadNFs() {
     const marketContract = await getMarketContract();
-    const marketItems = await marketContract.fetchMarketItems();
-    const items = await marketContractItemToListingItem(marketItems);
+    const myItems = await marketContract.fetchMyNFTs();
+    const items: ListingItem[] = await marketContractItemToListingItem(myItems);
 
     setNfts(items);
     setLoading("loaded");
@@ -22,10 +22,10 @@ const IndexPage = () => {
   }, []);
 
   if (loading === "loaded" && !nfts.length) {
-    return <h1 className="px-20 py-19 text-3xl">Market is empty </h1>;
+    return <h1 className="px-20 py-19 text-3xl">Nothing to display... </h1>;
   }
 
-  return <ItemList nfts={nfts} action="Buy" />;
+  return <ItemList nfts={nfts} />;
 };
 
-export default IndexPage;
+export default MyListingNFT;
