@@ -19,6 +19,7 @@ npx hardhat run scripts/deploy.js --network localhost
 FE commands:
 
 ```shell
+cd FE
 npm run dev
 npm run build
 npm run start

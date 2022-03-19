@@ -10,15 +10,16 @@ export async function marketContractItemToListingItem(myItems: any) {
       const meta = await axios.get(tokenUri);
 
       let price = ethers.utils.formatUnits(item.price.toString(), "ether");
-      return {
+      const result: ListingItem = {
         price,
-        tokenId: item.tokenId,
+        itemId: item.tokenId.toNumber(),
         seller: item.seller,
         owner: item.owner,
         image: meta.data.image,
         name: meta.data.name,
         description: meta.data.description,
       };
+      return result;
     })
   );
   return items;

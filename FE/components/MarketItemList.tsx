@@ -1,15 +1,18 @@
 import React from "react";
 
 type Props = {
-  nfts: ListingItem[];
-  action?: string;
+  items: ListingItem[];
+  action?: {
+    name: string;
+    fn: (item: ListingItem) => void;
+  };
 };
 
-const ItemList = ({ nfts, action }: Props) => (
+const ItemList = ({ items, action }: Props) => (
   <div className="flex justify-center">
     <div className="px-4" style={{ maxWidth: "1600px" }}>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-        {nfts.map((nft, i) => (
+        {items.map((item, i) => (
           <div
             key={i}
             className="border shadow rounded-xl overflow-hidden bg-gray-50"
@@ -17,25 +20,28 @@ const ItemList = ({ nfts, action }: Props) => (
             <img
               style={{ height: "250px", width: "100%" }}
               className="object-center"
-              src={nft.image}
-              alt={nft.name}
+              src={item.image}
+              alt={item.name}
             />
             <p
               style={{ height: "64px" }}
               className="text-2xl font-semibold p-2"
             >
-              {nft.name}
+              {item.name}
             </p>
             <div style={{ height: "70px", overflow: "hidden" }}>
-              <p className="text-gray-400 p-5">{nft.description}</p>
+              <p className="text-gray-400 p-5">{item.description}</p>
             </div>
             <div className="p-4 bg-black">
               <p className="text-2xl mb-4 font-bold text-white">
-                {nft.price} ETH
+                {item.price} ETH
               </p>
               {!!action && (
-                <button className="w-full bg-green-500 text-white font-bold py-2 px-12 rounded">
-                  {action}
+                <button
+                  className="w-full bg-green-500 text-white font-bold py-2 px-12 rounded"
+                  onClick={() => action.fn(item)}
+                >
+                  {action.name}
                 </button>
               )}
             </div>

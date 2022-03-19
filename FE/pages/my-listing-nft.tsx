@@ -12,7 +12,7 @@ const MyListingNFT = () => {
     const marketContract = await getMarketContract();
     const myItems = await marketContract.fetchMyNFTs();
     const items: ListingItem[] = await marketContractItemToListingItem(myItems);
-
+    console.log("items:", items);
     setNfts(items);
     setLoading("loaded");
   }
@@ -25,7 +25,7 @@ const MyListingNFT = () => {
     return <h1 className="px-20 py-19 text-3xl">Nothing to display... </h1>;
   }
 
-  return <ItemList nfts={nfts} />;
+  return <ItemList items={nfts} />;
 };
 
 export default MyListingNFT;

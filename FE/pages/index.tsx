@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { getMarketContract } from "../utils/getMarketContract";
 import ItemList from "../components/MarketItemList";
 import { marketContractItemToListingItem } from "../utils/marketContractItemToListingItem";
+import { ethers } from "ethers";
+import { nftAddress } from "../config";
 
 const IndexPage = () => {
   const [nfts, setNfts] = useState([] as ListingItem[]);
@@ -17,6 +19,19 @@ const IndexPage = () => {
     setLoading("loaded");
   }
 
+  async function saleNFT(item: ListingItem) {
+
+    const marketContract = await getMarketContract();
+    console.log("item", item);
+
+    const value = ethers.utils.parseUnits(item.price, "ether");
+
+    await marketContract.saleItem(nftAddress, item.itemId, {
+      value: value,
+    });
+    await loadNFs();
+  }
+
   useEffect(() => {
     loadNFs();
   }, []);
@@ -25,7 +40,7 @@ const IndexPage = () => {
     return <h1 className="px-20 py-19 text-3xl">Market is empty </h1>;
   }
 
-  return <ItemList nfts={nfts} action="Buy" />;
+  return <ItemList items={nfts} action={{ name: "Buy", fn: saleNFT }} />;
 };
 
 export default IndexPage;
