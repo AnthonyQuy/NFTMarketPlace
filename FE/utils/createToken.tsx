@@ -1,6 +1,8 @@
 import { getNFTContract } from "./getNFTContract";
 
 export async function createToken(client: any, data: string): Promise<string> {
+  console.log(`Creating token with data`);
+  console.log(data);
   try {
     const addedData = await client.add(data);
     const itemUrl = `https://ipfs.infura.io/ipfs/${addedData.path}`;

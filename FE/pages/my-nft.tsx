@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 
 import { getNFTContract } from "../utils/getNFTContract";
-import { getSelectedAddress } from "../utils/getSelectedAddress";
+import { getSignerAddress } from "../utils/getSelectedAddress";
 import axios from "axios";
-
 
 const MyNFT = () => {
   const [nfts, setNfts] = useState([] as NftViewItem[]);
@@ -11,10 +10,10 @@ const MyNFT = () => {
 
   async function loadNFs() {
     const nftContract = await getNFTContract();
-    const selectedAddress = await getSelectedAddress();
-    console.log("selectedAddress", selectedAddress);
+    const selectedAddress = await getSignerAddress();
+    console.log("SignerAddress", selectedAddress);
     const totalItems = await nftContract.totalItemCount();
-    console.log("totalItems", totalItems);
+    console.log("totalItems", totalItems.toString());
     const items: NftViewItem[] = [];
     for (let i = 1; i <= totalItems; i++) {
       const owner = await nftContract.ownerOf(i);
@@ -49,10 +48,7 @@ const MyNFT = () => {
               className="border shadow rounded-xl overflow-hidden bg-gray-50"
             >
               <img src={nft.image} alt={nft.name} />
-              <p
-                style={{ height: "64px" }}
-                className="text-xl p-2"
-              >
+              <p style={{ height: "64px" }} className="text-xl p-2">
                 #{nft.tokenId}
               </p>
               <p

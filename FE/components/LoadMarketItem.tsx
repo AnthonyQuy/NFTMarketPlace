@@ -12,7 +12,7 @@ const LoadMarketItem = () => {
     sold: false,
     nftContract: "",
     owner: "",
-    seller: "",
+    creator: "",
   });
 
   async function loadItem() {
@@ -29,7 +29,7 @@ const LoadMarketItem = () => {
         sold: item.sold,
         nftContract: item.nftContract,
         owner: item.owner,
-        seller: item.seller,
+        creator: item.creator,
       });
       // const meta = await axios.get(tokenUri);
       // console.log("meta", meta);

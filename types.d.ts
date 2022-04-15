@@ -15,7 +15,7 @@ type MarketContractItem = {
   itemId: number;
   address: string;
   tokenId: number;
-  seller: string;
+  creator: string;
   owner: string;
   price: number;
   sold: boolean;
@@ -24,7 +24,7 @@ type MarketContractItem = {
 type ListingItem = {
   price: string;
   itemId: number;
-  seller: string;
+  creator: string;
   owner: string;
   image: any;
   name: string;

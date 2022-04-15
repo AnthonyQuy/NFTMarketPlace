@@ -5,9 +5,15 @@ import Head from "next/head";
 type Props = {
   children?: ReactNode;
   title?: string;
+  marketAddress?: string;
 };
 
-const Layout = ({ children, title = "This is the default title" }: Props) => (
+const Layout = ({
+  children,
+  title = "This is the default title",
+  marketAddress = "",
+  
+}: Props) => (
   <div>
     <Head>
       <title>{title}</title>
@@ -17,8 +23,12 @@ const Layout = ({ children, title = "This is the default title" }: Props) => (
 
     <header>
       <nav className="border-b p-6">
-        <p className="text-4xl font-bold"> NFT Marketplace </p>
-
+        <div className="flex justify-between">
+          <p className="text-4xl font-bold"> NFT Marketplace </p>
+          {!!marketAddress && (
+            <p className="text-right text-gray-400 text-xs">Market Address: {marketAddress}</p>
+          )}
+        </div>
         <div className="flex mt-4">
           <Link href="/">
             <a className="mr-6 text-blue-500">Home</a>

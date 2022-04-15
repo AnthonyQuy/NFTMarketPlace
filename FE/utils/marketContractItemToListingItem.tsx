@@ -13,7 +13,7 @@ export async function marketContractItemToListingItem(myItems: any) {
       const result: ListingItem = {
         price,
         itemId: item.tokenId.toNumber(),
-        seller: item.seller,
+        creator: item.creator,
         owner: item.owner,
         image: meta.data.image,
         name: meta.data.name,

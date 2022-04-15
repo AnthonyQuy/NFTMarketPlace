@@ -23,6 +23,12 @@ const ItemList = ({ items, action }: Props) => (
               src={item.image}
               alt={item.name}
             />
+            <b
+              style={{ height: "64px" }}
+              className="text-2xl font-semibold p-2"
+            >
+              #{item.itemId}
+            </b>
             <p
               style={{ height: "64px" }}
               className="text-2xl font-semibold p-2"

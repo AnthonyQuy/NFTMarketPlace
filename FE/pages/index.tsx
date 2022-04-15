@@ -7,25 +7,24 @@ import { ethers } from "ethers";
 import { nftAddress } from "../config";
 
 const IndexPage = () => {
-  const [nfts, setNfts] = useState([] as ListingItem[]);
+  const [items, setItems] = useState([] as ListingItem[]);
   const [loading, setLoading] = useState("not-loaded");
 
   async function loadNFs() {
     const marketContract = await getMarketContract();
     const marketItems = await marketContract.fetchMarketItems();
     const items = await marketContractItemToListingItem(marketItems);
-
-    setNfts(items);
+    console.log(items);
+    setItems(items);
     setLoading("loaded");
   }
 
-  async function saleNFT(item: ListingItem) {
-
+  async function buyNFT(item: ListingItem) {
+    console.log("Buying item", item);
     const marketContract = await getMarketContract();
-    console.log("item", item);
-
     const value = ethers.utils.parseUnits(item.price, "ether");
-
+    console.log("Price", value);
+    console.log("Price", value.toString());
     await marketContract.saleItem(nftAddress, item.itemId, {
       value: value,
     });
@@ -36,11 +35,11 @@ const IndexPage = () => {
     loadNFs();
   }, []);
 
-  if (loading === "loaded" && !nfts.length) {
+  if (loading === "loaded" && !items.length) {
     return <h1 className="px-20 py-19 text-3xl">Market is empty </h1>;
   }
 
-  return <ItemList items={nfts} action={{ name: "Buy", fn: saleNFT }} />;
+  return <ItemList items={items} action={{ name: "Buy", fn: buyNFT }} />;
 };
 
 export default IndexPage;

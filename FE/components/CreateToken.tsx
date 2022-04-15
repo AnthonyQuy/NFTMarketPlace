@@ -12,6 +12,7 @@ const CreateToken = () => {
   });
   const [fileUrl, setFileUrl] = useState("");
   const [newTokenId, setNewTokenId] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function onUploadFileChange(e: any) {
     const file = e.target.files[0];
@@ -21,18 +22,24 @@ const CreateToken = () => {
       setFileUrl(fileUrl);
     } catch (error) {
       console.log(error);
+      setErrorMessage("Fail to upload file");
     }
   }
 
   async function createTokenFromInput() {
+    setErrorMessage("");
     const { name, description } = formInput;
     if (!isAllItemsExist(name, description, fileUrl)) {
-      alert("Please fill all the fields");
+      setErrorMessage("Please fill in all fields");
     } else {
       const data = JSON.stringify({ name, description, image: fileUrl });
-
-      const tokenId = await createToken(client, data);
-      setNewTokenId(tokenId);
+      try {
+        const tokenId = await createToken(client, data);
+        setNewTokenId(tokenId);
+      } catch (error) {
+        console.log(error);
+        setErrorMessage(JSON.stringify(error));
+      }
     }
   }
 
@@ -56,6 +63,7 @@ const CreateToken = () => {
         type="file"
         name="Token"
         className="my-4"
+        accept="image/*"
         onChange={onUploadFileChange}
       />
       {!!fileUrl && <img className="rounded mt-4" width="350" src={fileUrl} />}
@@ -68,6 +76,7 @@ const CreateToken = () => {
       {!!newTokenId && (
         <label className="text-blue-400">New Token ID: {newTokenId}</label>
       )}
+      {!!errorMessage && <a className="text-red-400">{errorMessage}</a>}
     </div>
   );
 };

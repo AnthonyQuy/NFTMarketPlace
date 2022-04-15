@@ -5,9 +5,12 @@ import axios from "axios";
 const LoadToken = () => {
   const [loadTokenId, setLoadTokenId] = useState("");
   const [tokenUrl, setTokenUrl] = useState("");
+  const [errorMessage, setErrormessage] = useState("");
 
   async function loadToken() {
     try {
+      setErrormessage("");
+      setTokenUrl("");
       let nftContract = await getNFTContract();
       const tokenUri = await nftContract.tokenURI(loadTokenId);
       console.log("tokenUri", tokenUri);
@@ -15,9 +18,13 @@ const LoadToken = () => {
       const meta = await axios.get(tokenUri);
       console.log("meta", meta);
       setTokenUrl(meta.data.image);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
-      alert(JSON.stringify(error));
+      if (error.data.message.includes("URI query for nonexistent token")) {
+        setErrormessage(`Token with ID ${loadTokenId} is not exist`);
+      } else {
+        alert(JSON.stringify(error));
+      }
     }
   }
 
@@ -34,6 +41,7 @@ const LoadToken = () => {
       >
         Load Token
       </button>
+      {!!errorMessage && <a className="text-red-400">{errorMessage}</a>}
       {!!tokenUrl && (
         <img className="rounded mt-4" width="350" src={tokenUrl} />
       )}
