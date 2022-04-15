@@ -27,7 +27,7 @@ const ItemList = ({ items, action }: Props) => (
               style={{ height: "64px" }}
               className="text-2xl font-semibold p-2"
             >
-              #{item.itemId}
+              #{item.listingId}
             </b>
             <p
               style={{ height: "64px" }}
@@ -40,7 +40,7 @@ const ItemList = ({ items, action }: Props) => (
             </div>
             <div className="p-4 bg-black">
               <p className="text-2xl mb-4 font-bold text-white">
-                {item.price} ETH
+                {item.price} ETH 
               </p>
               {!!action && (
                 <button

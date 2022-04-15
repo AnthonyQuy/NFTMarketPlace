@@ -12,12 +12,13 @@ export async function marketContractItemToListingItem(myItems: any) {
       let price = ethers.utils.formatUnits(item.price.toString(), "ether");
       const result: ListingItem = {
         price,
-        itemId: item.tokenId.toNumber(),
+        listingId: item.listingId.toNumber(),
         creator: item.creator,
         owner: item.owner,
         image: meta.data.image,
         name: meta.data.name,
         description: meta.data.description,
+      
       };
       return result;
     })

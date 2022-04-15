@@ -13,7 +13,10 @@ const IndexPage = () => {
   async function loadNFs() {
     const marketContract = await getMarketContract();
     const marketItems = await marketContract.fetchMarketItems();
+    console.log("marketItems");
+    console.log(marketItems);
     const items = await marketContractItemToListingItem(marketItems);
+    console.log("ListingItems");
     console.log(items);
     setItems(items);
     setLoading("loaded");
@@ -25,7 +28,7 @@ const IndexPage = () => {
     const value = ethers.utils.parseUnits(item.price, "ether");
     console.log("Price", value);
     console.log("Price", value.toString());
-    await marketContract.saleItem(nftAddress, item.itemId, {
+    await marketContract.saleItem(nftAddress, item.listingId, {
       value: value,
     });
     await loadNFs();

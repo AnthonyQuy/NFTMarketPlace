@@ -4,9 +4,9 @@ import axios from "axios";
 import { getMarketContract } from "../utils/getMarketContract";
 
 const LoadMarketItem = () => {
-  const [itemId, setItemId] = useState("");
+  const [listingId, setlistingId] = useState("");
   const [itemMeta, updateItemMeta] = useState({
-    itemId: "",
+    listingId: "",
     price: "",
     tokenId: "",
     sold: false,
@@ -19,11 +19,11 @@ const LoadMarketItem = () => {
     try {
       let marketContract = await getMarketContract();
       console.log("marketContract", marketContract);
-      const item = await marketContract.getMarketItem(itemId);
+      const item = await marketContract.getMarketItem(listingId);
       console.log("item", item);
 
       updateItemMeta({
-        itemId: item.itemId,
+        listingId: item.listingId,
         price: item.price.toString(),
         tokenId: item.tokenId,
         sold: item.sold,
@@ -45,7 +45,7 @@ const LoadMarketItem = () => {
       <input
         placeholder="Load Market Item ID"
         className="mt-8 border rounded p-4"
-        onChange={(e) => setItemId(e.target.value)}
+        onChange={(e) => setlistingId(e.target.value)}
       />
       <button
         onClick={loadItem}
@@ -53,7 +53,7 @@ const LoadMarketItem = () => {
       >
         Load Market Item
       </button>
-      {!!itemMeta.itemId && (
+      {!!itemMeta.listingId && (
         <textarea disabled={true} value={JSON.stringify(itemMeta)} />
       )}
     </div>

@@ -33,8 +33,8 @@ const Layout = ({
           <Link href="/">
             <a className="mr-6 text-blue-500">Home</a>
           </Link>
-          <Link href="/my-listing-nft">
-            <a className="mr-6 text-blue-500">My Listing NFT</a>
+          <Link href="/my-listed-nft">
+            <a className="mr-6 text-blue-500">My Listed NFT</a>
           </Link>
           <Link href="/sell-nft">
             <a className="mr-6 text-blue-500">Sell NFT</a>
