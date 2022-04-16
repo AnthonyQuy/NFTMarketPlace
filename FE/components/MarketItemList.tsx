@@ -18,8 +18,8 @@ const ItemList = ({ items, action }: Props) => (
             className="border shadow rounded-xl overflow-hidden bg-gray-50"
           >
             <img
-              style={{ height: "250px", width: "100%" }}
-              className="object-center"
+              // style={{ height: "250px", width: "100%" }}
+              // className="object-center"
               src={item.image}
               alt={item.name}
             />
@@ -27,8 +27,9 @@ const ItemList = ({ items, action }: Props) => (
               style={{ height: "64px" }}
               className="text-2xl font-semibold p-2"
             >
-              #{item.listingId}
+              #{item.tokenId}
             </b>
+
             <p
               style={{ height: "64px" }}
               className="text-2xl font-semibold p-2"
@@ -39,9 +40,12 @@ const ItemList = ({ items, action }: Props) => (
               <p className="text-gray-400 p-5">{item.description}</p>
             </div>
             <div className="p-4 bg-black">
-              <p className="text-2xl mb-4 font-bold text-white">
-                {item.price} ETH 
-              </p>
+              {!!item.price && (
+                <p className="text-2xl mb-4 font-bold text-white">
+                  {item.price} ETH
+                </p>
+              )}
+
               {!!action && (
                 <button
                   className="w-full bg-green-500 text-white font-bold py-2 px-12 rounded"
@@ -49,6 +53,11 @@ const ItemList = ({ items, action }: Props) => (
                 >
                   {action.name}
                 </button>
+              )}
+              {!!item.listingId && (
+                <b className="text-right text-gray-400 text-xs">
+                  Listing ID: {item.listingId} {!!item.sold && "(SOLD)"}
+                </b>
               )}
             </div>
           </div>

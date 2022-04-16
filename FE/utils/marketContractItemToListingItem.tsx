@@ -2,7 +2,9 @@ import { ethers } from "ethers";
 import axios from "axios";
 import { getNFTContract } from "./getNFTContract";
 
-export async function marketContractItemToListingItem(myItems: any) {
+export async function marketContractItemToListingItem(
+  myItems: MarketContractItem[]
+) {
   const nftContract = await getNFTContract();
   const items: ListingItem[] = await Promise.all(
     myItems.map(async (item: any) => {
@@ -18,7 +20,8 @@ export async function marketContractItemToListingItem(myItems: any) {
         image: meta.data.image,
         name: meta.data.name,
         description: meta.data.description,
-      
+        sold: item.sold,
+        tokenId: item.tokenId.toString(),
       };
       return result;
     })

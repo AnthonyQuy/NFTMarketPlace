@@ -12,7 +12,7 @@ const IndexPage = () => {
 
   async function loadNFs() {
     const marketContract = await getMarketContract();
-    const marketItems = await marketContract.fetchMarketItems();
+    const marketItems: MarketContractItem[] = await marketContract.fetchMarketItems();
     console.log("marketItems");
     console.log(marketItems);
     const items = await marketContractItemToListingItem(marketItems);

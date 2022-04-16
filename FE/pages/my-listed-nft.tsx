@@ -11,7 +11,7 @@ const MyListingNFT = () => {
   async function loadNFs() {
     const marketContract = await getMarketContract();
     const myItems = await marketContract.fetchMyNFTs();
-    const items: ListingItem[] = await marketContractItemToListingItem(myItems);
+    const items = await marketContractItemToListingItem(myItems);
     console.log("items:", items);
     setNfts(items);
     setLoading("loaded");

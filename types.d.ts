@@ -6,29 +6,30 @@ type MarketContract = {
   getListingFee: () => any;
   createMarketItem: (...any) => Promise<any>;
   saleItem: (...any) => Promise<any>;
-  fetchMarketItems: () => any;
-  fetchMyNFTs: () => any;
+  fetchMarketItems: () => Promise<MarketContractItem[]>;
+  fetchMyNFTs: () => Promise<MarketContractItem[]>;
   fetchMyCreatedItems: () => any;
 };
 
 type MarketContractItem = {
+  price: number;
   listingId: number;
-  address: string;
-  tokenId: number;
   creator: string;
   owner: string;
-  price: number;
+  tokenId: number;
   sold: boolean;
 };
 
 type ListingItem = {
   price: string;
   listingId: number;
+  tokenId: number;
   creator: string;
   owner: string;
   image: any;
   name: string;
   description: string;
+  sold: boolean;
 };
 
 type NftViewItem = {
